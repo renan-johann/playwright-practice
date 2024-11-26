@@ -15,13 +15,12 @@ test.describe('Swag Labs Login Tests', () => {
     const productsHeader = page.locator('.title');
     await expect(productsHeader).toBeVisible();
     const headerText = await productsHeader.textContent();
-    console.log("Header Text: " + headerText);
 
     expect(headerText).toContain('Products');
   });
 
   test('Should show error message for locked out user', async ({ page }) => {
-    await page.getByPlaceholder('Username').fill(process.env.PASSWORD_STANDARD);
+    await page.getByPlaceholder('Username').fill(process.env.USERNAME_LOCKED);
     await page.getByPlaceholder('Password').fill(process.env.PASSWORD_LOCKED);
     await page.locator('input[data-test=login-button]').click();
 
@@ -29,7 +28,6 @@ test.describe('Swag Labs Login Tests', () => {
     await expect(errorLocator).toBeVisible();
 
     const messageError = await errorLocator.textContent();
-    console.log("Message Error: " + messageError);
 
     expect(messageError).toContain('Epic sadface: Sorry, this user has been locked out.');
   });
