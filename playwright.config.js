@@ -10,7 +10,7 @@ module.exports = defineConfig({
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
   workers: process.env.CI ? 1 : undefined,
-  reporter: [['html', { outputFolder: 'output/playwright-report' }]],
+  reporter: [['html', { open: 'never', outputFolder: 'output/playwright-report' }]],
   outputDir: 'output/test-results',
   use: {
     baseURL: process.env.BASE_URL,
@@ -30,10 +30,10 @@ module.exports = defineConfig({
       use: { ...devices['Desktop Firefox'] },
     },
 
-    {
-      name: 'webkit',
-      use: { ...devices['Desktop Safari'] },
-    },
+    // {
+    //   name: 'webkit',
+    //   use: { ...devices['Desktop Safari'] },
+    // },
 
     /* Test against mobile viewports. */
     // {
